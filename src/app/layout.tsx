@@ -10,10 +10,8 @@ export const metadata: Metadata = {
     description: 'Welcome to the portfolio of Nguyen Anh Tuan Le, a Software Developer based in Toronto, Ontario, Canada. Explore my projects and skills.',
 }
 
-export default function RootLayout({children}: { children: React.ReactNode }) {
-    return (
-        <html lang="en">
-        <body className={inter.className}>{children}</body>
-        </html>
-    )
-}
+export default ({children}: { children: React.ReactNode }) => (
+    <html lang="en">
+    <body className={inter.className}>{children}</body>
+    </html>
+)
