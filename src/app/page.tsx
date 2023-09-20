@@ -1,13 +1,5 @@
 import Head from "next/head";
-import {BACKEND_URL} from "@/utilities";
-
-const fetchApi = async (api: string) => {
-    const response = await fetch(api);
-    if (!response.ok) {
-        throw new Error(response.statusText);
-    }
-    return await response.json();
-}
+import {BACKEND_URL, fetchApi} from "@/utilities";
 
 const Home = async () => {
     const gitHubUser = await fetchApi(`${BACKEND_URL}/github/user`);
