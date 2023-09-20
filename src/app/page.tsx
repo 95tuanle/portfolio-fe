@@ -1,15 +1,8 @@
-import {ResolvingMetadata} from "next";
+import Head from "next/head";
+import {BACKEND_URL} from "@/utilities";
 
-const getGitHubUser = async () => {
-    const response = await fetch('https://portfolio-be.adaptable.app/github/user');
-    if (!response.ok) {
-        throw new Error(response.statusText);
-    }
-    return await response.json();
-};
-
-const getGitHubUserRepos = async () => {
-    const response = await fetch('https://portfolio-be.adaptable.app/github/user/repos');
+const fetchApi = async (api: string) => {
+    const response = await fetch(api);
     if (!response.ok) {
         throw new Error(response.statusText);
     }
@@ -17,19 +10,24 @@ const getGitHubUserRepos = async () => {
 }
 
 const Home = async () => {
-    const gitHubUser = await getGitHubUser();
+    const gitHubUser = await fetchApi(`${BACKEND_URL}/github/user`);
     console.log(gitHubUser);
 
-    const gitHubUserRepos = await getGitHubUserRepos();
+    const gitHubUserRepos = await fetchApi(`${BACKEND_URL}/github/user/repos`);
     console.log(gitHubUserRepos);
 
     return (
-        <div>
+        <>
+            <Head>
+                <title>xPortfolio - Nguyen Anh Tuan Le</title>
+                <meta name="description"
+                      content="xWelcome to the portfolio of Nguyen Anh Tuan Le, a Software Developer based in Toronto, Ontario, Canada. Explore my projects and skills."/>
+            </Head>
             <p>{gitHubUser["name"]}</p>
             <p>{gitHubUser["bio"] + gitHubUser["company"]}</p>
             <p>Based in {gitHubUser["location"]}</p>
             <p>GitHub User: {gitHubUser["login"]}</p>
-        </div>
+        </>
     )
 };
 

@@ -1,0 +1,1 @@
+export const BACKEND_URL = "https://portfolio-be.adaptable.app";
