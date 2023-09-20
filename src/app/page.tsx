@@ -14,8 +14,7 @@ const getGitHubUserRepos = async () => {
     return await response.json();
 }
 
-
-export default async () => {
+const Home = async () => {
     const gitHubUser = await getGitHubUser();
     console.log(gitHubUser);
 
@@ -31,4 +30,6 @@ export default async () => {
             <p>GitHub User: {gitHubUser["login"]}</p>
         </div>
     )
-}
+};
+
+export default Home;
