@@ -1,7 +1,5 @@
-export default function Test() {
-    return (
-        <div>
-            <h1>Test Route</h1>
-        </div>
-    )
-}
+export default () => (
+    <div>
+        <h1>Test</h1>
+    </div>
+)
