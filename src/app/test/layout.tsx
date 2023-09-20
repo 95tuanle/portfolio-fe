@@ -1,7 +1,9 @@
 import React from "react";
 
-export default ({children}: { children: React.ReactNode }) => (
+const TestLayout = ({children}: { children: React.ReactNode }) => (
     <section>
         {children}
     </section>
-)
+);
+
+export default TestLayout;
