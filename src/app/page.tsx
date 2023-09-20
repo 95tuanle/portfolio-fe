@@ -1,3 +1,5 @@
+import {ResolvingMetadata} from "next";
+
 const getGitHubUser = async () => {
     const response = await fetch('https://portfolio-be.adaptable.app/github/user');
     if (!response.ok) {
@@ -23,10 +25,9 @@ const Home = async () => {
 
     return (
         <div>
-            <p>Nguyen Anh Tuan Le</p>
-            <p>Software Developer</p>
-            <p>Based in Toronto, Ontario, Canada</p>
-            <p>Explore my projects and skills.</p>
+            <p>{gitHubUser["name"]}</p>
+            <p>{gitHubUser["bio"] + gitHubUser["company"]}</p>
+            <p>Based in {gitHubUser["location"]}</p>
             <p>GitHub User: {gitHubUser["login"]}</p>
         </div>
     )
