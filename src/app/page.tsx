@@ -1,11 +1,7 @@
 import {BACKEND_URL, fetchApi} from "@/utilities";
 import {Metadata} from "next";
 
-let gitHubUser: any = {
-    name: "",
-    bio: "",
-    location: ""
-};
+let gitHubUser: any;
 let gitHubUserRepos: any;
 
 export const generateMetadata = (): Metadata => {
