@@ -10,18 +10,14 @@ export const generateMetadata = async (): Promise<Metadata> => {
         openGraph: {
             title: `Portfolio - ${gitHubUser["name"]}`,
             description: `Welcome to the portfolio of ${gitHubUser["name"]}, a ${gitHubUser["bio"]} based in ${gitHubUser["location"]}. Explore my projects and skills.`,
-            images: [{
-                url: gitHubUser["avatar_url"]
-            }]
+            images: [{url: gitHubUser["avatar_url"]}]
         },
         twitter: {
             title: `Portfolio - ${gitHubUser["name"]}`,
             description: `Welcome to the portfolio of ${gitHubUser["name"]}, a ${gitHubUser["bio"]} based in ${gitHubUser["location"]}. Explore my projects and skills.`,
             creator: `@${gitHubUser["twitter_username"]}`,
-            images: [{
-                url: gitHubUser["avatar_url"]
-            }]
-        },
+            images: [{url: gitHubUser["avatar_url"]}]
+        }
     }
 };
 
@@ -30,7 +26,7 @@ const Home = async () => {
     console.log(gitHubUser);
 
     const gitHubUserRepos = await fetchApi(`${BACKEND_URL}/github/user/repos`);
-    // console.log(gitHubUserRepos);
+    console.log(gitHubUserRepos);
 
     return (
         <>
