@@ -1,14 +1,8 @@
 import {BACKEND_URL, fetchApi} from "@/utilities";
 import {Metadata} from "next";
 
-let gitHubUser: any = {
-    name: "",
-    bio: "",
-    location: ""
-};
-let gitHubUserRepos: any;
-
-export const generateMetadata = (): Metadata => {
+export const generateMetadata = async (): Promise<Metadata> => {
+    const gitHubUser = await fetchApi(`${BACKEND_URL}/github/user`);
     return {
         title: `Portfolio - ${gitHubUser["name"]}`,
         description: `Welcome to the portfolio of ${gitHubUser["name"]}, a ${gitHubUser["bio"]} based in ${gitHubUser["location"]}. Explore my projects and skills.`,
@@ -16,10 +10,10 @@ export const generateMetadata = (): Metadata => {
 };
 
 const Home = async () => {
-    gitHubUser = await fetchApi(`${BACKEND_URL}/github/user`);
+    const gitHubUser = await fetchApi(`${BACKEND_URL}/github/user`);
     console.log(gitHubUser);
 
-    gitHubUserRepos = await fetchApi(`${BACKEND_URL}/github/user/repos`);
+    const gitHubUserRepos = await fetchApi(`${BACKEND_URL}/github/user/repos`);
     console.log(gitHubUserRepos);
 
     return (
