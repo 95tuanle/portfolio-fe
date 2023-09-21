@@ -1,7 +1,7 @@
-const Test = () => (
+const Page = () => (
     <>
         <h1>Test</h1>
     </>
 );
 
-export default Test;
+export default Page;

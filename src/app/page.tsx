@@ -1,5 +1,7 @@
 import {BACKEND_URL, fetchApi} from "@/utilities";
 import {Metadata} from "next";
+import GitHubUser from "@/components/github-user";
+import GithubUserRepos from "@/components/github-user-repos";
 
 export const generateMetadata = async (): Promise<Metadata> => {
     const gitHubUser = await fetchApi(`${BACKEND_URL}/github/user`);
@@ -7,6 +9,12 @@ export const generateMetadata = async (): Promise<Metadata> => {
         title: `Portfolio - ${gitHubUser["name"]}`,
         description: `Welcome to the portfolio of ${gitHubUser["name"]}, a ${gitHubUser["bio"]} based in ${gitHubUser["location"]}. Explore my projects and skills.`,
         metadataBase: new URL(gitHubUser["avatar_url"]),
+        icons: {
+            icon: {url: gitHubUser["avatar_url"]},
+            shortcut: {url: gitHubUser["avatar_url"]},
+            apple: {url: gitHubUser["avatar_url"]},
+            other: {url: gitHubUser["avatar_url"]}
+        },
         openGraph: {
             title: `Portfolio - ${gitHubUser["name"]}`,
             description: `Welcome to the portfolio of ${gitHubUser["name"]}, a ${gitHubUser["bio"]} based in ${gitHubUser["location"]}. Explore my projects and skills.`,
@@ -21,21 +29,17 @@ export const generateMetadata = async (): Promise<Metadata> => {
     }
 };
 
-const Home = async () => {
+const Page = async () => {
     const gitHubUser = await fetchApi(`${BACKEND_URL}/github/user`);
-    console.log(gitHubUser);
 
     const gitHubUserRepos = await fetchApi(`${BACKEND_URL}/github/user/repos`);
-    console.log(gitHubUserRepos);
 
     return (
         <>
-            <p>{gitHubUser["name"]}</p>
-            <p>{gitHubUser["bio"] + gitHubUser["company"]}</p>
-            <p>Based in {gitHubUser["location"]}</p>
-            <p>GitHub User: {gitHubUser["login"]}</p>
+            <GitHubUser gitHubUser={gitHubUser}/>
+            <GithubUserRepos gitHubUserRepos={gitHubUserRepos}/>
         </>
     )
 };
 
-export default Home;
+export default Page;
