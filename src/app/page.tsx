@@ -10,13 +10,17 @@ export const generateMetadata = async (): Promise<Metadata> => {
         openGraph: {
             title: `Portfolio - ${gitHubUser["name"]}`,
             description: `Welcome to the portfolio of ${gitHubUser["name"]}, a ${gitHubUser["bio"]} based in ${gitHubUser["location"]}. Explore my projects and skills.`,
-            images: ['']
+            images: [{
+                url: gitHubUser["avatar_url"]
+            }]
         },
         twitter: {
             title: `Portfolio - ${gitHubUser["name"]}`,
             description: `Welcome to the portfolio of ${gitHubUser["name"]}, a ${gitHubUser["bio"]} based in ${gitHubUser["location"]}. Explore my projects and skills.`,
             creator: `@${gitHubUser["twitter_username"]}`,
-            images: ['']
+            images: [{
+                url: gitHubUser["avatar_url"]
+            }]
         },
     }
 };
