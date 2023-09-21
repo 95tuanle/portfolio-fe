@@ -1,35 +1,34 @@
-import {ResolvingMetadata} from "next";
+import {BACKEND_URL, fetchApi} from "@/utilities";
+import {Metadata} from "next";
 
-const getGitHubUser = async () => {
-    const response = await fetch('https://portfolio-be.adaptable.app/github/user');
-    if (!response.ok) {
-        throw new Error(response.statusText);
+let gitHubUser: any = {
+    name: "",
+    bio: "",
+    location: ""
+};
+let gitHubUserRepos: any;
+
+export const generateMetadata = (): Metadata => {
+    return {
+        title: `Portfolio - ${gitHubUser["name"]}`,
+        description: `Welcome to the portfolio of ${gitHubUser["name"]}, a ${gitHubUser["bio"]} based in ${gitHubUser["location"]}. Explore my projects and skills.`,
     }
-    return await response.json();
 };
 
-const getGitHubUserRepos = async () => {
-    const response = await fetch('https://portfolio-be.adaptable.app/github/user/repos');
-    if (!response.ok) {
-        throw new Error(response.statusText);
-    }
-    return await response.json();
-}
-
 const Home = async () => {
-    const gitHubUser = await getGitHubUser();
+    gitHubUser = await fetchApi(`${BACKEND_URL}/github/user`);
     console.log(gitHubUser);
 
-    const gitHubUserRepos = await getGitHubUserRepos();
+    gitHubUserRepos = await fetchApi(`${BACKEND_URL}/github/user/repos`);
     console.log(gitHubUserRepos);
 
     return (
-        <div>
+        <>
             <p>{gitHubUser["name"]}</p>
             <p>{gitHubUser["bio"] + gitHubUser["company"]}</p>
             <p>Based in {gitHubUser["location"]}</p>
             <p>GitHub User: {gitHubUser["login"]}</p>
-        </div>
+        </>
     )
 };
 
