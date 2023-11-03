@@ -34,12 +34,10 @@ const Page = async () => {
 
   const gitHubUserRepos = await fetchApi(`${BACKEND_URL}/github/user/repos`);
 
-  return (
-    <>
-      <GitHubUser gitHubUser={gitHubUser}/>
-      <GithubUserRepos gitHubUserRepos={gitHubUserRepos}/>
-    </>
-  )
+  return (<>
+    <GitHubUser gitHubUser={gitHubUser}/>
+    <GithubUserRepos gitHubUserRepos={gitHubUserRepos}/>
+  </>)
 };
 
 export default Page;
